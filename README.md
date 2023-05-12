@@ -1,4 +1,4 @@
-# react-starter-tailwind-ts-2023-v3
+# ts-react-test-projects
 
 A new version of CRA starter kit with Tailwind and TypeScript - experimental
 React Starter with Tailwind &amp; React Router Dom 6x & Daisy UI
