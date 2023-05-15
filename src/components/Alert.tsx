@@ -7,12 +7,11 @@ interface Props {
 
 const Alert = ({ children, onClose }: Props) => {
   return (
-    <div className="alert alert-info mt-5 alert-dismissible">
-      <h1 className="text-teal-200">{children}</h1>
+    <div className="alert alert-success shadow-lg mt-5">
+      <h1 className="text-red-500">{children}</h1>
       <button
         type="button"
-        className="btn-close"
-        data-bs-dismiss="alert"
+        className="border-2 border-white py-1 px-3 rounded-full text-white"
         aria-label="Close"
         onClick={onClose}
       >
