@@ -1,77 +1,129 @@
-import React from "react";
+import React, { FormEvent, useRef, useState } from "react";
 import { Container, Row, Box } from "../components/layouts";
 import "./Home.scss";
 
 const HomePage = () => {
+  const [personObj, setPersonObj] = useState({
+    name: "",
+    age: 0,
+  });
+  const nameRef = useRef<HTMLInputElement>(null);
+  const ageRef = useRef<HTMLInputElement>(null);
+  const person = { name: "", age: 0 };
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+
+    if (nameRef.current !== null) person.name = nameRef.current.value;
+
+    if (ageRef.current !== null) person.age = parseInt(ageRef.current.value);
+
+    console.log({ person });
+  };
+  const handleSubmitState = (e: FormEvent) => {
+    e.preventDefault();
+
+    console.log({ personObj });
+  };
+
   return (
     <Container className={""} FULL={false} pageTitle={"Home"}>
-      <Row className={"prose"}>
-        <h1 className="h1">This could be a starting point ...</h1>
-        <h2 className="h2">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit
-        </h2>
-        <h3 className="h3">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit
-        </h3>
-        <p>
-          Possimus et, ex eum rem mollitia totam eius ad, sapiente eos maiores
-          voluptatum, explicabo harum quos dolores nemo eaque reprehenderit quo.
-          Iure. Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-          Possimus et, ex eum rem mollitia totam eius ad, sapiente eos maiores
-          voluptatum, explicabo harum quos dolores nemo eaque reprehenderit quo.
-          Iure.Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-          Possimus et, ex eum rem mollitia totam eius ad, sapiente eos maiores
-          voluptatum, explicabo harum quos dolores nemo eaque reprehenderit quo.
-          Iure.Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-          Possimus et, ex eum rem mollitia totam eius ad, sapiente eos maiores
-          voluptatum, explicabo harum quos dolores nemo eaque reprehenderit quo.
-          Iure.Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-          Possimus et, ex eum rem mollitia totam eius ad, sapiente eos maiores
-          voluptatum, explicabo harum quos dolores nemo eaque reprehenderit quo.
-          Iure.
-        </p>
-      </Row>
-      <Row className={"prose flex flex-wrap justify-around"}>
-        {/* p-5 CLASS WILL BREAK EVERYTHING */}
-        <Box className={"p-3 w-[32rem]"}>
-          <h3>This is box one w/ prose class</h3>
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quasi
-            explicabo expedita neque voluptas exercitationem eum quia, nostrum
-            inventore itaque accusamus doloremque. Ipsam ratione repellendus
-            nulla libero doloremque non commodi tempore.
-          </p>
-        </Box>
-        <Box className={"p-3 w-[32rem]"}>
-          <h3>This is box two w/ prose class</h3>
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quasi
-            explicabo expedita neque voluptas exercitationem eum quia, nostrum
-            inventore itaque accusamus doloremque. Ipsam ratione repellendus
-            nulla libero doloremque non commodi tempore.
-          </p>
-        </Box>
-      </Row>
-      <Row className={"prose-2xl grid gap-3 grid-auto-fit"}>
-        {/* p-5 CLASS WILL BREAK EVERYTHING */}
-        <Box className={"p-4"}>
-          <h4>This is 2nd Box One w/ prose 2xl class</h4>
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus
-            et, ex eum rem mollitia totam eius ad, sapiente eos maiores
-            voluptatum, explicabo harum quos dolores nemo eaque reprehenderit
-            quo. Iure.
-          </p>
-        </Box>
-        <Box className={"p-4"}>
-          <h4>This is 2nd Box Two w/ prose 2xl class</h4>
+      <Row className={"grid grid-cols-1 sm:grid-cols-2  gap-1 prose"}>
+        <Box className={"p-3"}>
+          <h1 className="h1">Form Ref:</h1>
+          <form className="form-control" onSubmit={handleSubmit}>
+            <label className="label" htmlFor="name">
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              className="input input-bordered input-primary mb-2"
+              placeholder="Your Name"
+              ref={nameRef}
+            />
+            <label className="label" htmlFor="age">
+              Age
+            </label>
+            <input
+              type="text"
+              id="age"
+              className="input input-bordered input-primary mb-2"
+              placeholder="Your Age"
+              ref={ageRef}
+            />
+            <button className="btn mt-3">Submit</button>
+          </form>
 
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus
-            et, ex eum rem mollitia totam eius ad, sapiente eos maiores
-            voluptatum, explicabo harum quos dolores nemo eaque reprehenderit
-            quo. Iure.
-          </p>
+          <hr />
+        </Box>
+        <Box className={"p-3"}>
+          <h1 className="h1">Form State:</h1>
+          <form className="form-control" onSubmit={handleSubmitState}>
+            <label className="label" htmlFor="name">
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              className="input input-bordered input-primary mb-2"
+              placeholder="Your Name"
+              onChange={(e) =>
+                setPersonObj({ ...personObj, name: e.target.value })
+              }
+              value={personObj.name}
+            />
+            <label className="label" htmlFor="age">
+              Age
+            </label>
+            <input
+              type="text"
+              id="age"
+              className="input input-bordered input-primary mb-2"
+              placeholder="Your Age"
+              onChange={(e) =>
+                setPersonObj({ ...personObj, age: parseInt(e.target.value) })
+              }
+              value={personObj.age}
+            />
+            <button className="btn mt-3">Submit</button>
+          </form>
+
+          <hr />
+        </Box>
+        <Box className={"p-3"}>
+          <h1 className="h1">Form Hook Form:</h1>
+          <form className="form-control" onSubmit={handleSubmitState}>
+            <label className="label" htmlFor="name">
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              className="input input-bordered input-primary mb-2"
+              placeholder="Your Name"
+              onChange={(e) =>
+                setPersonObj({ ...personObj, name: e.target.value })
+              }
+              value={personObj.name}
+            />
+            <label className="label" htmlFor="age">
+              Age
+            </label>
+            <input
+              type="text"
+              id="age"
+              className="input input-bordered input-primary mb-2"
+              placeholder="Your Age"
+              onChange={(e) =>
+                setPersonObj({ ...personObj, age: parseInt(e.target.value) })
+              }
+              value={personObj.age}
+            />
+            <button className="btn mt-3">Submit</button>
+          </form>
+
+          <hr />
         </Box>
       </Row>
     </Container>

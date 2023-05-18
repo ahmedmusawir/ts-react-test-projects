@@ -10,11 +10,12 @@ import {
 } from "./components/layouts";
 import Home from "./pages/Home";
 import Demo from "./pages/Demo";
-import PageOne from "./pages/PageOne";
 import NotFoundPage from "./pages/NotFoundPage";
 import SendEmail from "./pages/SendEmail";
 import "./App.scss";
 import MoshPage from "./pages/MoshPage";
+import PageDaisyUI from "./pages/PageDaisyUI";
+import StatePage from "./pages/StatePage";
 
 function App() {
   return (
@@ -34,9 +35,9 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/demo" element={<Demo />} />
-              <Route path="/page-one" element={<PageOne />} />
+              <Route path="/page-one" element={<PageDaisyUI />} />
               <Route path="/page-two" element={<MoshPage />} />
-              {/* <Route path="/send-mail" element={<SendEmail />} /> */}
+              <Route path="/states" element={<StatePage />} />
               <Route path="/*" element={<NotFoundPage />} />
             </Routes>
           </Main>

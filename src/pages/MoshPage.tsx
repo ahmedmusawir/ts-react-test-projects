@@ -23,9 +23,9 @@ const MoshPage = () => {
   return (
     <Container className="" FULL={false} pageTitle="Home">
       <Row className="prose">
-        <h1 className="text-teal-500 font-semibold text-5xl ">
+        {/* <h1 className="text-teal-500 font-semibold text-5xl ">
           The Moose is TS
-        </h1>
+        </h1> */}
         <ListGroup
           items={items}
           heading={heading}

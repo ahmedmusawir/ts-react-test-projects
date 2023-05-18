@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Row, Box } from "../components/layouts";
 import "./Home.scss";
 
-const Page = () => {
+const HomePage = () => {
   return (
     <Container className={""} FULL={false} pageTitle={"Home"}>
       <Row className={"prose"}>
@@ -78,4 +78,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default HomePage;

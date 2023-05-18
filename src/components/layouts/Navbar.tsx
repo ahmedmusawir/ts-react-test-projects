@@ -32,15 +32,15 @@ const Navbar = ({ className }: Props) => {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <Link to={"/page-one"}>Page One</Link>
+              <Link to={"/page-one"}>Daisy UI</Link>
             </li>
             <li>
-              <Link to={"/page-two"}>Page Two</Link>
+              <Link to={"/page-two"}>Mosh One</Link>
             </li>
           </ul>
         </div>
         <Link to={"/"} className="btn btn-ghost normal-case text-xl">
-          Moose UI
+          Mosh UI
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -51,13 +51,13 @@ const Navbar = ({ className }: Props) => {
             </Link>
           </li>
           <li>
-            <Link to={"/page-one"}>Page One</Link>
+            <Link to={"/page-one"}>DaisyUI</Link>
           </li>
           <li>
-            <Link to={"/page-two"}>Page Two</Link>
+            <Link to={"/page-two"}>Mosh One</Link>
           </li>
           <li>
-            <Link to={"/send-mail"}>EmailJS</Link>
+            <Link to={"/states"}>States</Link>
           </li>
         </ul>
       </div>
