@@ -32,7 +32,7 @@ const Navbar = ({ className }: Props) => {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <Link to={"/page-one"}>Daisy UI</Link>
+              <Link to={"/expense"}>Expense</Link>
             </li>
             <li>
               <Link to={"/page-two"}>Mosh One</Link>
@@ -51,13 +51,16 @@ const Navbar = ({ className }: Props) => {
             </Link>
           </li>
           <li>
-            <Link to={"/page-one"}>DaisyUI</Link>
+            <Link to={"/expense"}>Expense</Link>
           </li>
           <li>
             <Link to={"/page-two"}>Mosh One</Link>
           </li>
           <li>
             <Link to={"/states"}>States</Link>
+          </li>
+          <li>
+            <Link to={"/forms"}>Forms</Link>
           </li>
         </ul>
       </div>

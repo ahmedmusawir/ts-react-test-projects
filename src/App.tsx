@@ -16,6 +16,8 @@ import "./App.scss";
 import MoshPage from "./pages/MoshPage";
 import PageDaisyUI from "./pages/PageDaisyUI";
 import StatePage from "./pages/StatePage";
+import FormsPage from "./pages/FormsPage";
+import ExpensePage from "./pages/ExpensePage";
 
 function App() {
   return (
@@ -38,6 +40,8 @@ function App() {
               <Route path="/page-one" element={<PageDaisyUI />} />
               <Route path="/page-two" element={<MoshPage />} />
               <Route path="/states" element={<StatePage />} />
+              <Route path="/forms" element={<FormsPage />} />
+              <Route path="/expense" element={<ExpensePage />} />
               <Route path="/*" element={<NotFoundPage />} />
             </Routes>
           </Main>
