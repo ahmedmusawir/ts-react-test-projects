@@ -1,53 +1,54 @@
-import { useState } from "react";
+import AddData from "../components/data-fetch/AddData";
+import ApiClientUsage from "../components/data-fetch/api-client-fetch/ApiClientUsage";
+import ApiClient from "../components/data-fetch/api-client-fetch/ApiClientUsage";
+import AxiosAsync from "../components/data-fetch/AxiosAsync";
+import AxiosPromise from "../components/data-fetch/AxiosPromise";
+import DeleteData from "../components/data-fetch/DeleteData";
+import UpdateData from "../components/data-fetch/UpdateData";
 import { Container, Row, Box } from "../components/layouts";
-import ExpenseFilter from "../expense-tracker/components/ExpenseFilter";
-import ExpenseForm from "../expense-tracker/components/ExpenseForm";
-import ExpenseList from "../expense-tracker/components/ExpenseList";
-import "./Home.scss";
-import { ExpenseFormData } from "../expense-tracker/components/ExpenseForm";
 
 const HomePage = () => {
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [expenses, setExpenses] = useState([
-    { id: 1, description: "Product #1", amount: 2, category: "Grocery" },
-    { id: 2, description: "Product #2", amount: 5, category: "Utilities" },
-    { id: 3, description: "Product #3", amount: 1, category: "Grocery" },
-    { id: 4, description: "Product #4", amount: 3, category: "Entertainment" },
-  ]);
-
-  const handleDelete = (id: Number) => {
-    const newExpenses = expenses.filter((expense) => expense.id !== id);
-    setExpenses(newExpenses);
-  };
-
-  const handleSubmit = (expense: ExpenseFormData) => {
-    setExpenses([...expenses, { ...expense, id: expenses.length + 1 }]);
-  };
-
-  const visibleExpenses = selectedCategory
-    ? expenses.filter((exp) => exp.category === selectedCategory)
-    : expenses;
-
-  console.log("Selelcted Cat", selectedCategory);
-
-  const handleSelect = (selectedCat: string) => {
-    setSelectedCategory(selectedCat);
-  };
-
   return (
     <Container className={""} FULL={false} pageTitle={"Home"}>
       <Row className={"grid grid-cols-1 sm:grid-cols-2  gap-1 prose"}>
         <Box className={"p-3"}>
-          <h1 className="h1">Expense Form</h1>
-          <ExpenseForm onSubmit={handleSubmit} />
+          <h2>Get Data: axios promise</h2>
+          <AxiosPromise />
+          <hr />
+        </Box>
+        <Box className={"p-3"}>
+          <h2>Get Data: axios async</h2>
+          <AxiosAsync />
+          <hr />
+        </Box>
+        <Box className={"p-3"}>
+          <h2>Delete Data</h2>
+          <DeleteData />
+          <hr />
+        </Box>
+        <Box className={"p-3"}>
+          <h2>Create Data</h2>
+          <AddData />
+          <hr />
+        </Box>
+        <Box className={"p-3"}>
+          <h2>Update Data</h2>
+          <UpdateData />
+          <hr />
+        </Box>
+        <Box className={"p-3"}>
+          <h2>API Client Usage: axios</h2>
+          <ApiClientUsage />
+          <hr />
+        </Box>
+        <Box className={"p-3"}>
+          <h2>HTTP Service: axios</h2>
 
           <hr />
         </Box>
         <Box className={"p-3"}>
-          <h1 className="h1">Expense List</h1>
-          <ExpenseFilter onSelectCategory={handleSelect} />
+          <h2>Data Fetch Hook: axios</h2>
 
-          <ExpenseList expenses={visibleExpenses} onDelete={handleDelete} />
           <hr />
         </Box>
       </Row>
