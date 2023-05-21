@@ -2,11 +2,6 @@ import React, { useEffect, useState } from "react";
 import { CanceledError } from "axios";
 import userService, { User } from "../../services/UserService";
 
-// interface User {
-//   id: number;
-//   name: string;
-// }
-
 function UpdateData() {
   const [users, setUsers] = useState<User[]>([]);
   const [error, setError] = useState("");
@@ -15,7 +10,7 @@ function UpdateData() {
   useEffect(() => {
     setIsLoading(true);
 
-    const { request, cancel } = userService.getAllUsers();
+    const { request, cancel } = userService.getAll<User>();
     // console.log({ request });
 
     request
@@ -39,7 +34,7 @@ function UpdateData() {
       name: "Mosh",
     };
     setUsers(users.map((u) => (u.id === user.id ? updatedUser : u)));
-    userService.updateUser(updatedUser).catch((err) => {
+    userService.update(updatedUser).catch((err) => {
       setError(err.message);
       setUsers(originalUsers);
     });

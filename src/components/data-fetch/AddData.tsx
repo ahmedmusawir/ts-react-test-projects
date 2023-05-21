@@ -2,12 +2,6 @@ import React, { useEffect, useState } from "react";
 import { CanceledError } from "axios";
 import userService, { User } from "../../services/UserService";
 
-// NEEDED BEFORE REFACTORING W/ USER SERVICE
-// interface User {
-//   id: string;
-//   name: string;
-// }
-
 function AddData() {
   const [users, setUsers] = useState<User[]>([]);
   const [error, setError] = useState("");
@@ -16,7 +10,7 @@ function AddData() {
   useEffect(() => {
     setIsLoading(true);
 
-    const { request, cancel } = userService.getAllUsers();
+    const { request, cancel } = userService.getAll<User>();
     // console.log({ request });
 
     request
@@ -39,7 +33,7 @@ function AddData() {
 
     setUsers([newUser, ...users]);
 
-    userService.createUser(newUser).catch((err) => {
+    userService.create(newUser).catch((err) => {
       setError(err.message);
       setUsers(originalUsers);
     });

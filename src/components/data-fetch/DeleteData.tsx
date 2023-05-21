@@ -2,21 +2,16 @@ import React, { useEffect, useState } from "react";
 import { CanceledError } from "axios";
 import userService, { User } from "../../services/UserService";
 
-// interface User {
-//   id: number;
-//   name: string;
-// }
-
 function DeleteData() {
   const [users, setUsers] = useState<User[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const { request, cancel } = userService.getAllUsers();
+  const { request, cancel } = userService.getAll();
 
   useEffect(() => {
     setIsLoading(true);
-    const { request, cancel } = userService.getAllUsers();
+    const { request, cancel } = userService.getAll<User>();
     // console.log({ request });
 
     request
@@ -37,7 +32,7 @@ function DeleteData() {
     const originalUsers = [...users];
     setUsers(users.filter((user) => user.id !== id));
 
-    userService.deleteUser(id).catch((err) => {
+    userService.delete(id).catch((err) => {
       setError(err.message);
       setUsers(originalUsers);
     });

@@ -1,7 +1,49 @@
-import useUsers from "../../hooks/useUsers";
+import React, { useEffect, useState } from "react";
+import { CanceledError } from "axios";
+import userService, { User } from "../../services/UserService";
 
-function AxiosPromise() {
-  const { users, error, isLoading } = useUsers();
+// NEEDED BEFORE REFACTORING W/ USER SERVICE
+// interface User {
+//   id: string;
+//   name: string;
+// }
+
+function AddData() {
+  const [users, setUsers] = useState<User[]>([]);
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+
+    const { request, cancel } = userService.getAllUsers();
+    // console.log({ request });
+
+    request
+      .then((res) => {
+        setUsers(res.data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        if (err instanceof CanceledError) return;
+        setError(err.message);
+      });
+
+    // Clean up
+    return () => cancel();
+  }, []);
+
+  const addUser = () => {
+    const originalUsers = [...users];
+    const newUser = { id: 0, name: "Mosh" };
+
+    setUsers([newUser, ...users]);
+
+    userService.createUser(newUser).catch((err) => {
+      setError(err.message);
+      setUsers(originalUsers);
+    });
+  };
 
   return (
     <>
@@ -27,13 +69,21 @@ function AxiosPromise() {
           <span className="sr-only">Loading...</span>
         </div>
       )}
-      <ul>
+      <ul className="p-4 border card">
         {users.map((user) => (
-          <li key={user.id}>{user.name}</li>
+          <li
+            className="bg-gray-200 list-none flex justify-between"
+            key={user.id}
+          >
+            {user.name}
+          </li>
         ))}
+        <button onClick={addUser} className="btn btn-secondary btn-xs">
+          Add
+        </button>
       </ul>
     </>
   );
 }
 
-export default AxiosPromise;
+export default AddData;

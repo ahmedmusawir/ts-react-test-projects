@@ -1,7 +1,31 @@
-import useUsers from "../../hooks/useUsers";
+import { useEffect, useState } from "react";
+import { CanceledError } from "axios";
+import userService, { User } from "../../services/UserService";
 
 function AxiosPromise() {
-  const { users, error, isLoading } = useUsers();
+  const [users, setUsers] = useState<User[]>([]);
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+
+    const { request, cancel } = userService.getAllUsers();
+    // console.log({ request });
+
+    request
+      .then((res) => {
+        setUsers(res.data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        if (err instanceof CanceledError) return;
+        setError(err.message);
+      });
+
+    // Clean up
+    return () => cancel();
+  }, []);
 
   return (
     <>
